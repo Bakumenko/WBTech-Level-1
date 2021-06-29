@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var s = "string with name Oleg, symbol 世界, ⌘ and русское слово"
 
