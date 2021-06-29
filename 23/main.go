@@ -3,17 +3,17 @@ package main
 import "fmt"
 
 var (
-	slice          = []int{2, 5, 8, 12, 16, 23, 38, 56, 72, 91}
-	searchedNumber = 5
+	slice1          = []int{2, 5, 8, 12, 16, 23, 38, 56, 72, 91}
+	searchedNumber1 = 5
 )
 
-func binarySearch(slice []int, target int, start int, end int) int {
+func binarySearch1(slice []int, target int, start int, end int) int {
 	mid := (start + end) / 2
 	if start <= end {
 		if target < slice[mid] {
-			return binarySearch(slice, target, start, mid-1)
+			return binarySearch1(slice, target, start, mid-1)
 		} else if slice[mid] < target {
-			return binarySearch(slice, target, mid+1, end)
+			return binarySearch1(slice, target, mid+1, end)
 		} else if slice[mid] == target {
 			return mid
 		}
@@ -22,7 +22,7 @@ func binarySearch(slice []int, target int, start int, end int) int {
 }
 
 func main() {
-	fmt.Println("Slice = ", slice)
-	index := binarySearch(slice, searchedNumber, 0, len(slice)-1)
-	fmt.Printf("%v is index of %v", index, searchedNumber)
+	fmt.Println("Slice = ", slice1)
+	index := binarySearch1(slice1, searchedNumber1, 0, len(slice1)-1)
+	fmt.Printf("%v is index of %v", index, searchedNumber1)
 }
