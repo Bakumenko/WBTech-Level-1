@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-var sls1 = []string{
+var sls2 = []string{
 	"cat",
 	"cat",
 	"dog",
@@ -15,28 +15,31 @@ var sls1 = []string{
 	"рыба",
 }
 
-type mySet map[string]struct{}
-
-func NewSet() mySet {
-	return make(map[string]struct{})
+type mySet2 struct {
+	keys []string
 }
 
-func (s mySet) Insert(str string) bool {
-	if _, ok := s[str]; ok {
-		return false
-	} else {
-		s[str] = struct{}{}
+func NewSet2() mySet2 {
+	return mySet2{[]string{}}
+}
+
+func (s *mySet2) Insert(str string) bool {
+	for _, val := range s.keys {
+		if val == str {
+			return false
+		}
 	}
+	s.keys = append(s.keys, str)
 	return true
 }
 
-func (s mySet) String() string {
+func (s mySet2) String() string {
 	var keys string = "["
 	var size int
-	for key, _ := range s {
+	for _, key := range s.keys {
 		keys += key
 		size++
-		if size != len(s) {
+		if size != len(s.keys) {
 			keys += " "
 		}
 	}
@@ -45,8 +48,8 @@ func (s mySet) String() string {
 }
 
 func main() {
-	set := NewSet()
-	for _, s := range sls1 {
+	set := NewSet2()
+	for _, s := range sls2 {
 		f := set.Insert(s)
 		if f == false {
 			fmt.Printf("%v is already contains\n", s)
