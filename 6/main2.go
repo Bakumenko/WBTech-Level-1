@@ -1,23 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func worker2(c chan int) {
-	i := 1
+func worker2(flag *bool) {
 	for {
-		select {
-		case c <- i:
-			i++
-		case <-c:
+		if *flag {
+			fmt.Println("Worker is finished")
 			return
 		}
 	}
 }
 
 func main() {
-	c := make(chan int)
-	go worker2(c)
-	fmt.Println(<-c)
-	fmt.Println(<-c)
-	close(c)
+	fmt.Println("Start")
+	flag := false
+	go worker2(&flag)
+
+	time.Sleep(time.Second)
+	flag = true
+	time.Sleep(time.Second)
+	fmt.Println("End")
 }

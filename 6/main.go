@@ -25,6 +25,7 @@ func closeWorker(c chan bool) {
 }
 
 func main() {
+	fmt.Println("Start")
 	c := make(chan bool)
 	var wg sync.WaitGroup
 
@@ -34,5 +35,5 @@ func main() {
 	go closeWorker(c)
 
 	wg.Wait()
-	fmt.Println("End main")
+	fmt.Println("End")
 }
