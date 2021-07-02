@@ -30,7 +30,7 @@ func checkUnique(s string, mu *sync.Mutex) {
 			return
 		} else {
 			mu.Lock()
-			oleg[s] = true
+			m[rune] = struct{}{}
 			mu.Unlock()
 		}
 	}
