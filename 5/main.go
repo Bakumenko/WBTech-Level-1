@@ -7,13 +7,13 @@ import (
 
 var countSeconds = 2
 
-func send(c <-chan int) {
+func print(c <-chan int) {
 	for value := range c {
 		fmt.Println(value)
 	}
 }
 
-func print(c chan<- int) {
+func send(c chan<- int) {
 	var i int
 	for {
 		c <- i
