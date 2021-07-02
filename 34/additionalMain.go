@@ -29,9 +29,7 @@ func checkUnique(s string, mu *sync.Mutex) {
 			mu.Unlock()
 			return
 		} else {
-			mu.Lock()
 			m[rune] = struct{}{}
-			mu.Unlock()
 		}
 	}
 	mu.Lock()
