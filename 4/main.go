@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -10,6 +11,7 @@ var (
 
 func worker(id int, c <-chan interface{}) {
 	for value := range c {
+		time.Sleep(time.Millisecond)
 		fmt.Printf("%v worker: %v\n", id, value)
 	}
 }
