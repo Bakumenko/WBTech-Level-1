@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	m     = make(map[rune]struct{})
+	oleg  = map[string]bool{}
 	slice = []string{
-		"asd",
+		"aasd",
 		"фыв",
 		"aasd",
 		"фывв",
@@ -19,24 +19,29 @@ var (
 	}
 )
 
-func checkUnique(s string, mu *sync.Mutex) bool {
+func checkUnique(s string, mu *sync.Mutex) {
 	runes := []rune(s)
-	mu.Lock()
+	m := make(map[rune]struct{})
 	for _, rune := range runes {
 		if _, ok := m[rune]; ok {
+			mu.Lock()
+			oleg[s] = false
 			mu.Unlock()
-			return false
-		} else {
-			m[rune] = struct{}{}
+			return
 		}
 	}
+	mu.Lock()
+	oleg[s] = true
 	mu.Unlock()
-	return true
 }
 
 func main() {
 	var mu sync.Mutex
 	for _, s := range slice {
-		fmt.Printf("All symbols of (%v) are uniq: %v\n", s, checkUnique(s, &mu))
+		go checkUnique(s, &mu)
+	}
+
+	for key, value := range oleg {
+		fmt.Printf("All symbols of (%v) are uniq: %v\n", key, value)
 	}
 }
