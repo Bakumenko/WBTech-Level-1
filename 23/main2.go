@@ -7,7 +7,7 @@ var (
 	searchedNumber2 = 5
 )
 
-func binarySearch2(slice []int, target int) int {
+func binarySearch1(slice []int, target int) int {
 	first := 0
 	last := len(slice) - 1
 	for first <= last {
@@ -25,6 +25,6 @@ func binarySearch2(slice []int, target int) int {
 
 func main() {
 	fmt.Println("Slice = ", slice2)
-	index := binarySearch2(slice2, searchedNumber2)
+	index := binarySearch1(slice2, searchedNumber2)
 	fmt.Printf("%v is index of %v", index, searchedNumber2)
 }
