@@ -10,7 +10,7 @@ var (
 	sum   int
 )
 
-func squaring(index int, value int, wg *sync.WaitGroup, m *sync.Mutex) {
+func squaring(value int, wg *sync.WaitGroup, m *sync.Mutex) {
 	sqv := value * value
 	m.Lock()
 	sum += sqv
@@ -22,9 +22,9 @@ func main() {
 	fmt.Printf("Started array = %v\n", slice)
 	var wg sync.WaitGroup
 	var m sync.Mutex
-	for index, val := range slice {
+	for _, val := range slice {
 		wg.Add(1)
-		go squaring(index, val, &wg, &m)
+		go squaring(val, &wg, &m)
 	}
 	wg.Wait()
 	fmt.Printf("Sum = %v\n", sum)
