@@ -28,6 +28,10 @@ func checkUnique(s string, mu *sync.Mutex) {
 			oleg[s] = false
 			mu.Unlock()
 			return
+		} else {
+			mu.Lock()
+			oleg[s] = true
+			mu.Unlock()
 		}
 	}
 	mu.Lock()
