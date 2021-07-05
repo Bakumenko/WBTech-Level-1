@@ -29,7 +29,9 @@ func isPalindromeUniversalConcurrency(targer interface{}, wg *sync.WaitGroup, mu
 			return
 		}
 	}
+	mu.Lock()
 	resultMap[targer] = true
+	mu.Unlock()
 	wg.Done()
 }
 
